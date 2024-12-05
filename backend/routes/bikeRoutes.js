@@ -14,6 +14,8 @@ router.post('/', (req, res, next) => {
     });
 }, bikesController.createBike);
 
+router.get('/', bikesController.listBikes);
+
 /* router.put('/:id', updateBike);
 router.get('/', listBikes);
 router.delete('/:id/sell', sellBike);

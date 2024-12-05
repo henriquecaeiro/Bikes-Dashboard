@@ -49,10 +49,12 @@ module.exports = async (req, res) => {
         // Insere na tabela `bike_buyers`
         await connection.query('INSERT INTO bike_buyers (bike_id, buyer_id, purchase_price) VALUES (?, ?, ?)', [bikeId, buyerId, purchasePrice]);
 
+        // Verifica se existe alguma foto ou documento inserido
         if (photos.length > 0 || documents.length > 0) {
            
             const queries = []; // Armazena todas as queries para executar em lote
         
+            //Processa as fotos e os documentos
             photos.forEach(photo => {
                 queries.push(
                     connection.query(
@@ -71,7 +73,7 @@ module.exports = async (req, res) => {
                 );
             });
         
-            await Promise.all(queries);
+            await Promise.all(queries); // Executa as queries
         }
 
         await connection.commit(); //confirma a transação
